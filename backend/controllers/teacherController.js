@@ -100,9 +100,44 @@ const getFeedbackSummary = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch feedback summary" });
   }
 };
+const getViewChats = async (req, res) => {
+  const { questionId } = req.params;
+
+  try {
+    const commentsData = await Feedback.find({
+      question: questionId,
+      comment: { $ne: '' } // non-empty comments only
+    }).select('comment -_id');
+
+    const comments = commentsData.map(entry => entry.comment);
+
+    res.status(200).json({ comments });
+  } catch (err) {
+    console.error("🔴 Error fetching chats:", err);
+    res.status(500).json({ message: 'Failed to fetch chats' });
+  }
+};
+
+const getMyQuestions = async (req, res) => {
+  try {
+    const questions = await Question.find({ teacher: req.user.id }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      total: questions.length,
+      questions
+    });
+  } catch (err) {
+    console.error("🔴 Error fetching teacher questions:", err);
+    res.status(500).json({ message: "Failed to fetch your questions" });
+  }
+};
+
+
 
 module.exports = {
   loginTeacher,
   postQuestion,
-  getFeedbackSummary
+  getFeedbackSummary,
+  getViewChats,
+  getMyQuestions
 };

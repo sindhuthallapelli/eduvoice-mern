@@ -58,7 +58,7 @@ const Feedback = require('../models/Feedback');
 
 const submitFeedback = async (req, res) => {
   const studentId = req.user._id;
-  const { questionId, response } = req.body;
+  const { questionId, response, comment } = req.body;
 
   try {
     const question = await Question.findById(questionId);
@@ -75,8 +75,14 @@ const submitFeedback = async (req, res) => {
       return res.status(400).json({ message: 'Feedback already submitted for this question' });
     }
 
-    // Save feedback
-    await Feedback.create({ student: studentId, question: questionId, response });
+    // Save feedback with optional comment
+    await Feedback.create({
+      student: studentId,
+      question: questionId,
+      response,
+      comment: comment || ""  // default to empty string if not provided
+    });
+
     res.status(201).json({ message: 'Feedback submitted successfully' });
   } catch (err) {
     console.error(err);

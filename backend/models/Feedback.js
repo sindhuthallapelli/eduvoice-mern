@@ -5,6 +5,7 @@ const feedbackSchema = new mongoose.Schema({
   student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
   question: { type: mongoose.Schema.Types.ObjectId, ref: 'Question' },
   response: { type: String, enum: ['Good', 'Better', 'Interactive', 'Lack of Interest'], required: true },
+  comment: { type: String, default: '' },
   timestamp: { type: Date, default: Date.now }
 });
 
