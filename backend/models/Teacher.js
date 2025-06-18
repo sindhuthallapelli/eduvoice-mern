@@ -5,7 +5,7 @@ const teacherSchema = new mongoose.Schema({
   password: { type: String, required: true },
   assignedClasses: [
     {
-      className: String,
+      class: String,
       section: String
     }
   ]

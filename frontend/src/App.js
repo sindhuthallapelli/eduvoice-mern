@@ -10,6 +10,9 @@ import TeacherClassSelect from './pages/TeacherClassSelect';
 import TeacherDashboard from './pages/TeacherDashboard';
 import PostQuestion from './pages/PostQuestion';
 import ViewReports from './pages/ViewReports';
+import ViewFeedback from './pages/ViewFeedback';
+import ViewChats from './pages/ViewChats';
+
 
 import StudentLogin from './pages/StudentLogin';
 import StudentDashboard from './pages/StudentDashboard';
@@ -30,6 +33,8 @@ function App() {
         <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
         <Route path="/teacher/post-question" element={<PostQuestion />} />
         <Route path="/teacher/view-reports" element={<ViewReports />} />
+        <Route path="/teacher/feedback-summary/:questionId" element={<ViewFeedback />} />
+        <Route path="/teacher/view-chats/:questionId" element={<ViewChats />} />
 
         {/* Student routes */}
         <Route path="/student/login" element={<StudentLogin />} />

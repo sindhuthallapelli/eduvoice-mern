@@ -1,0 +1,11 @@
+
+{
+  "name": "eduvoice-mern",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

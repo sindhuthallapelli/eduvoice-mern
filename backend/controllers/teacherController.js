@@ -131,7 +131,15 @@ const getMyQuestions = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch your questions" });
   }
 };
-
+const getTeacherClasses = async (req, res) => {
+  try {
+    // req.user is set by authMiddleware and includes assignedClasses
+    return res.status(200).json({ assignedClasses: req.user.assignedClasses });
+  } catch (err) {
+    console.error('Error fetching teacher classes:', err);
+    res.status(500).json({ message: 'Unable to load classes' });
+  }
+};
 
 
 module.exports = {
@@ -139,5 +147,6 @@ module.exports = {
   postQuestion,
   getFeedbackSummary,
   getViewChats,
-  getMyQuestions
+  getMyQuestions,
+  getTeacherClasses
 };
