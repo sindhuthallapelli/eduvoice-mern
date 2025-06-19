@@ -22,7 +22,7 @@ export default function PostQuestion() {
         '/api/teacher/post-question',
         {
           questionText: question,
-          
+          className: cls,
           section,
           deadline
         },
